@@ -1,0 +1,27 @@
+drop table if exists OURWAY_SYS_JOB;
+
+/*==============================================================*/
+/* Table: OURWAY_SYS_JOB                                        */
+/*==============================================================*/
+create table OURWAY_SYS_JOB
+(
+   OWID                 national varchar(64) not null,
+   JOB_NAME             national varchar(240),
+   JOB_DESC             national varchar(240) comment '唯一',
+   JOB_CLASS            national varchar(240),
+   JOB_TYPE             tinyint comment '0 系统任务 1 定时任务',
+   JOB_CRON             national varchar(240),
+   CREATETIME           datetime,
+   CREATOR              national varchar(64),
+   CREATOR_NAME         national varchar(16),
+   LASTUPDATE           datetime,
+   UPDATOR              national varchar(64),
+   UPDATOR_NAME         national varchar(16),
+   VER                  int,
+   VERTIME              datetime,
+   DEPT_ID              int,
+   DEPT_PATH            national varchar(240),
+   DELFLG               int comment '0：正常 -1：删除 -100模板另存',
+   STATE                int comment '-1 :作废 0：正常可修改  100：工作流完成 1-99是流程',
+   primary key (OWID)
+);

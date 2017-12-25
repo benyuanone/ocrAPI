@@ -1,0 +1,11 @@
+alter table `ourway_sys_layout`
+   add column `CONTROL_BANDBOX_INT` varchar(480) NULL ;
+
+alter table `ourway_sys_page_component`
+   add column `KJ_TIPS_LABEL` varchar(240) NULL ;
+
+alter table `ourway_sys_form`
+   add column `DAYS` int(11) NULL ;
+
+alter table `ourway_sys_flow_class`
+   add column `VARS` varchar(240) NULL ;

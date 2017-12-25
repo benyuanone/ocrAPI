@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+		lang-addon.xml Purpose: Description: This file is useless for zkdemo
+		but demostrates how to add new components and override definitions of
+		existent components. History: Sta Dec 16 2006, Created by VAMSC *
+		Copyright (c) 2003-2006 Bluemars,All rights reserved.
+	-->
+
+<language-addon>
+	<addon-name>bckjZK</addon-name>
+	<language-name>xul/html</language-name>
+	<device-type>ajax</device-type>
+	<namespace>http://www.zkoss.org/2005/zul</namespace>
+	<extension>do</extension><!-- the first extension is the major one -->
+	<extension>xul</extension>
+
+    <!--<javascript-module name="ckez" version="4.0"/>-->
+	<!--<zscript>-->
+	<!--import org.zkforge.ckez.*;-->
+	<!--</zscript>-->
+	<!--<component>-->
+		<!--<component-name>ckeditor</component-name>-->
+		<!--<component-class>org.zkforge.ckez.CKeditor</component-class>-->
+		<!--<widget-class>ckez.CKeditor</widget-class>-->
+		<!--<annotation>-->
+			<!--<annotation-name>ZKBIND</annotation-name>-->
+			<!--<property-name>value</property-name>-->
+			<!--<attribute>-->
+				<!--<attribute-name>ACCESS</attribute-name>-->
+				<!--<attribute-value>both</attribute-value>-->
+			<!--</attribute>-->
+			<!--<attribute>-->
+				<!--<attribute-name>SAVE_EVENT</attribute-name>-->
+				<!--<attribute-value>onChange</attribute-value>-->
+			<!--</attribute>-->
+		<!--</annotation>	-->
+	<!--</component>-->
+
+
+	<component>
+		<component-name>nav</component-name>
+		<component-class>org.zkoss.zkmax.zul.Nav</component-class>
+		<widget-class>zkmax.nav.Nav</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/nav.js</mold-uri>
+			<css-uri>css/nav.css.dsp</css-uri>
+		</mold>
+	</component>
+	<component>
+		<component-name>navbar</component-name>
+		<component-class>org.zkoss.zkmax.zul.Navbar</component-class>
+		<widget-class>zkmax.nav.Navbar</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/navbar.js</mold-uri>
+			<css-uri>css/nav.css.dsp</css-uri>
+		</mold>
+		<mold>
+			<mold-name>bs</mold-name>
+		</mold>
+		<mold>
+			<mold-name>bs-pills</mold-name>
+		</mold>
+		<mold>
+			<mold-name>bs-tabs</mold-name>
+		</mold>
+	</component>
+	<component>
+		<component-name>navitem</component-name>
+		<component-class>org.zkoss.zkmax.zul.Navitem</component-class>
+		<widget-class>zkmax.nav.Navitem</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/navitem.js</mold-uri>
+			<css-uri>css/nav.css.dsp</css-uri>
+		</mold>
+	</component>
+	<component>
+		<component-name>navseparator</component-name>
+		<component-class>org.zkoss.zkmax.zul.Navseparator</component-class>
+		<widget-class>zkmax.nav.Navseparator</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/navseparator.js</mold-uri>
+			<css-uri>css/nav.css.dsp</css-uri>
+		</mold>
+	</component>
+
+	<component>
+		<component-name>detail</component-name>
+		<component-class>org.zkoss.zul.Detail</component-class>
+		<widget-class>zkex.grid.Detail</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/detail.js</mold-uri>
+			<css-uri>css/grid.css.dsp</css-uri>
+		</mold>
+	</component>
+	<component>
+		<component-name>group</component-name>
+		<component-class>org.zkoss.zul.Group</component-class>
+		<widget-class>zkex.grid.Group</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/group.js</mold-uri>
+		</mold>
+	</component>
+	<component>
+		<component-name>groupfoot</component-name>
+		<component-class>org.zkoss.zul.Groupfoot</component-class>
+		<widget-class>zkex.grid.Groupfoot</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/groupfoot.js</mold-uri>
+		</mold>
+	</component>
+	<component>
+		<component-name>dropupload</component-name>
+		<component-class>org.zkoss.zkmax.zul.Dropupload</component-class>
+		<widget-class>zkmax.wgt.Dropupload</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/dropupload.js</mold-uri>
+			<css-uri>css/dropupload.css.dsp</css-uri>
+		</mold>
+		<annotation>
+			<annotation-name>ZKBIND</annotation-name>
+			<property-name>native</property-name>
+			<attribute>
+				<attribute-name>CONVERTER</attribute-name>
+				<attribute-value>org.zkoss.zkmax.bind.impl.DropuploadNativeConverter</attribute-value>
+			</attribute>
+			<attribute>
+				<!-- ZK-1691 Dropupload has "native" property (reserved identifier in EL)
+				simply use another word, the value will set by converter
+				-->
+				<attribute-name>LOAD_REPLACEMENT</attribute-name>
+				<attribute-value>none</attribute-value>
+			</attribute>
+		</annotation>
+	</component>
+	<component>
+		<component-name>chosenbox</component-name>
+		<component-class>com.ourway.base.zk.component.BaseChosenbox</component-class>
+		<widget-class>chosenbox.Chosenbox</widget-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>mold/chosenbox.js</mold-uri>
+			<css-uri>css/chosenbox.css.dsp</css-uri>
+		</mold>
+	</component>
+</language-addon>

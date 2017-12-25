@@ -1,0 +1,1 @@
+(function(){var a={};zk.override(zul.mesh.Paging.prototype,a,{setMold:function(b){if(this._mold!=b){this._mold=b;this.rerender()}}})})();

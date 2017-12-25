@@ -1,0 +1,1 @@
+zkmax.nav.Navseparator=zk.$extends(zul.Widget,{isNav:function(){return this.parent&&this.parent.$instanceof(zkmax.nav.Nav)},getNavbar:function(){for(var a=this.parent;a;a=a.parent){if(a.$instanceof(zul.menu.Navbar)){return a}}return null}});

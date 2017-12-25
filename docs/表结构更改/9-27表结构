@@ -1,0 +1,12 @@
+alter table ourway_sys_object
+   add column `CLASS_LOG` tinyint(4) NULL,
+   add column `CLASS_CA` varchar(240) NULL;
+
+alter table `ourway_sys_object_attribute`
+   add column `ATTRIBUTE_DISPLAY` tinyint(4) NULL ;
+
+alter table ourway_sys_flownode_per
+   add column `PER_FILTER` varchar(240) NULL;
+
+   alter table `ourway_sys_flownode`
+      add column `NODE_MSG_TO` varchar(240) NULL;

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page title="ZK Test" language="xul/html"?>
+<!--
+messagebox.zul
+
+	Purpose:
+		
+	Description:
+
+	History:
+		Wed Jul 7 12:00:12     2010, Created by simon
+
+Copyright (C) 2010 Potix Corporation. All Rights Reserved.
+-->
+<window  sclass="z-messagebox-window "
+ border="none" width="400px" style="max-width:750px;" height="200px" closable="true"
+ use="com.ourway.base.zk.component.BaseMessageboxDlg" xmlns:w="client" xmlns:h="http://www.w3.org/1999/xhtml">
+ <style >
+    .h2{display: block; font-size: 1.2em; -webkit-margin-before: 0.73em; -webkit-margin-after: 0.73em; -webkit-margin-start: 0px; -webkit-margin-end: 0px; font-weight: bold;}
+    .z-ok-button{margin-left:-10px;width:110px;height:43px;color: #fff;background: #81c784;}
+    .z-ok {font-size: 14px;min-height: 24px; -webkit-border-radius: 1px; border-radius: 1px; padding: 0px 0px; line-height: 14px;text-shadow: 0 1px #fff;cursor: pointer;white-space: nowrap;}
+    .z-ok:hover,.z-ok:focus,.z-ok:active,.z-ok.active, .open>.dropdown-toggle.z-ok {color: #ffffff;background-color: #81c784;border-color: #81c784;background: #81c784;}
+    .z-cancer-button{margin-left:-10px;width:110px;height:43px;color: #fff;background: #e57373;}
+    .z-cancerbutton {font-size: 14px;min-height: 24px; -webkit-border-radius: 1px; border-radius: 1px; padding: 0px 0px; line-height: 14px;text-shadow: 0 1px #fff;cursor: pointer;white-space: nowrap;}
+    .z-cancerbutton:hover,.z-cancerbutton:focus,.z-cancerbutton:active,.z-cancerbutton.active, .open>.dropdown-toggle.z-cancerbutton {color: #ffffff;background-color: #e57373;border-color: #e57373;background: #e57373;}
+
+ </style>
+	<div align="center" style="width:90%;" >
+	   <div>
+	      <h:h2 class="h2"><div sclass="${arg.icon}"/>${arg.title}</h:h2>
+	   </div>
+	   <h:p>
+	      ${arg.message}
+	   </h:p>
+	</div>
+	<h:br></h:br>
+	<div align="center" style="width:92%;height:50px;position:absolute;bottom:5px;overflow:hidden;">
+	    <hbox id="buttons" >
+            <custom-attributes button.sclass="z-messagebox-button"/><!-- CSS class for buttons -->
+    	</hbox>
+	</div>
+</window>

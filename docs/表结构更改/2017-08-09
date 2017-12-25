@@ -1,0 +1,2 @@
+alter table `owboss`.`ourway_sys_page_component`
+     add column `KJ_ICONCLASS` varchar(160) NULL ;

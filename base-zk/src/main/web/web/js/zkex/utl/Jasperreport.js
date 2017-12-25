@@ -1,0 +1,1 @@
+zkex.utl.Jasperreport=zk.$extends(zul.utl.Iframe,{});

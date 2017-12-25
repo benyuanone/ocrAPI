@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+     <!-- 引入 jdbc 配置文件 -->
+     <bean id="propertyConfigurer"
+           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+          <property name="location" value="classpath:app/config.properties" />
+     </bean>
+
+     <!--配置数据库链接-->
+     <bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+          <property name="driver" value="${proxool.driverClassName}"/>
+          <property name="driverUrl" value="${proxool.url}"/>
+          <property name="user" value="${proxool.username}"/>
+          <property name="password" value="${proxool.password}"/>
+          <!-- 测试的SQL执行语句 -->
+          <property name="houseKeepingTestSql" value="${proxool.testSql"/>
+          <!-- 最少保持的空闲连接数 （默认2个） -->
+          <property name="prototypeCount" value="${proxool.prototypeCount}"/>
+          <property name="houseKeepingSleepTime" value="${proxool.hourseKeepingSleepTime}"/>
+          <!-- proxool自动侦察各个连接状态的时间间隔(毫秒),侦察到空闲的连接就马上回收,超时的销毁 默认30秒）
+          <property name="houseKeepingSleepTime" value="${proxool.hourseKeepingSleepTime}"/>
+          -->
+          <!-- 最大活动时间(超过此时间线程将被kill,默认为5分钟) -->
+          <property name="maximumActiveTime" value="${proxool.maximumActiveTime}"/>
+          <!-- 连接最长时间(默认为4个小时)
+          <property name="maximumConnectionLifetime" value="${proxool.maximumConnectionLifetime}"/>-->
+          <!-- 最小连接数 （默认2个） -->
+          <property name="minimumConnectionCount" value="${proxool.minimumConnectionCount}"/>
+          <!-- 最大连接数 （默认5个） -->
+          <property name="maximumConnectionCount" value="${proxool.maximumConnectionCount}"/>
+          <!-- -->
+          <property name="statistics" value="${proxool.statistics}"/>
+          <!-- 别名 -->
+          <property name="alias" value="${proxool.alias}"/>
+          <!--同时建立的连接数 -->
+          <property name="simultaneousBuildThrottle" value="${proxool.simultaneous-build-throttle}"/>
+     </bean>
+     <!--配置hibernate5的session-->
+     <bean id="sessionFactory"   class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+          <property name="dataSource" ref="dataSource" />
+          <property name="hibernateProperties">
+               <props>
+                    <prop key="hibernate.dialect">
+                         ${hibernate.dialect}
+                    </prop>
+                    <prop key="hibernate.show_sql">
+                         ${hibernate.show_sql}
+                    </prop>
+                    <prop key="hibernate.generate_statistics">
+                         ${hibernate.generate_statistics}
+                    </prop>
+                    <prop key="hibernate.query.substitutions">
+                         true 1, false 0
+                    </prop>
+                    <!--
+                    <prop key="hibernate.cache.use_query_cache">
+                        ${hibernate.use_query_cache}
+                    </prop>
+                    <prop key="hibernate.cache.use_second_level_cache">
+                        ${hibernate.use_second_level_cache}
+                    </prop>
+                    <prop key="hibernate.cache.provider_class">
+                        ${hibernate.cache_provider_class}
+                    </prop>
+
+                    <prop key="hibernate.cache.provider_configuration_file_resource_path">
+                        ${hibernate.cache_configuration_file}
+                    </prop>
+                    -->
+               </props>
+          </property>
+          <property name="packagesToScan">
+               <list>
+                    <value>com.ourway.base.model</value>
+                    <value>com.ourway.*.model</value>
+               </list>
+          </property>
+     </bean>
+     <!--事务管理-->
+     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+          <property name="sessionFactory" ref="sessionFactory" />
+     </bean>
+     <!-- Transaction Advisor-->
+     <tx:advice id="txAdvice" transaction-manager="transactionManager">
+          <tx:attributes>
+               <tx:method name="get*" read-only="true" propagation="SUPPORTS" />
+               <tx:method name="list*" read-only="true" propagation="SUPPORTS" />
+               <tx:method name="do*" read-only="true" propagation="SUPPORTS" />
+               <tx:method name="save*" propagation="REQUIRED" />
+               <tx:method name="update*" propagation="REQUIRED" />
+               <tx:method name="remove*" propagation="REQUIRED" />
+          </tx:attributes>
+     </tx:advice>
+
+     <!--配置注解模式，扫描指定的包进行注解读入-->
+     <context:annotation-config/>
+     <context:component-scan base-package="com.ourway.base;com.ourway.*.dao;com.ourway.*.service" />
+
+     <aop:config>
+          <aop:pointcut id="serviceOperation"
+                        expression="execution(* com.ourway.*.*.*.*(..))" />
+          <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
+     </aop:config>
+     <tx:annotation-driven transaction-manager="transactionManager" />
+
+
+     <!-- 配置JedisPoolConfig实例 -->
+     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+          <property  name="maxIdle" value="${redis.pool.maxIdle}" />
+          <property name="maxTotal" value="${redis.pool.maxActive}" />
+          <property name="maxWaitMillis" value="${redis.pool.maxWait}" />
+          <property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+     </bean>
+     <!-- 配置JedisConnectionFactory -->
+     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+          <property name="hostName" value="${redis.host}"/>
+          <property name="port" value="${redis.host.port}"/>
+          <property name="password" value="${redis.password}"/>
+          <property name="database" value="${redis.pool.dbindex}"/>
+          <property name="poolConfig" ref="poolConfig"/>
+     </bean>
+     <bean id="defaultRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"></bean>
+     <!-- 配置RedisTemplate -->
+     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+          <property name="connectionFactory" ref="jedisConnectionFactory"/>
+          <property name="defaultSerializer" ref="defaultRedisSerializer"/>
+     </bean>
+
+     <!-- 加载activiti引擎 -->
+     <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+          <property name="processEngineConfiguration" ref="processEngineConfiguration" />
+     </bean>
+     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+          <property name="dataSource" ref="dataSource" />
+          <property name="transactionManager" ref="transactionManager" />
+          <property name="databaseSchemaUpdate" value="true" />
+          <property name="jobExecutorActivate" value="false" />
+          <property name="activityFontName"  value="宋体" />
+          <property name="labelFontName"  value="宋体" />
+     </bean>
+
+     <!-- activiti的各种服务接口 -->
+     <bean id="repositoryService" factory-bean="processEngine"
+           factory-method="getRepositoryService" />
+     <bean id="runtimeService" factory-bean="processEngine"
+           factory-method="getRuntimeService" />
+     <bean id="taskService" factory-bean="processEngine"
+           factory-method="getTaskService" />
+     <bean id="historyService" factory-bean="processEngine"
+           factory-method="getHistoryService" />
+     <bean id="managementService" factory-bean="processEngine"
+           factory-method="getManagementService" />
+     <bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService"/>
+</beans>

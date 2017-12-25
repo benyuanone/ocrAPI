@@ -1,0 +1,1 @@
+zul.inp.Bandpopup=zk.$extends(zul.Widget,{afterChildrenMinFlex_:function(b){if(b=="w"){var c=this.parent,a=c&&c.$n("pp");if(a){a.style.width=jq.px0(this._hflexsz+zk(a).padBorderWidth());zk(a)._updateProp(["width"])}}}});

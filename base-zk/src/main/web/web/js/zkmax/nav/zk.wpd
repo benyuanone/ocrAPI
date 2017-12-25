@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- zk.wpd
+
+	Purpose:
+		
+	Description:
+		
+	History:
+		Tue Jun 18 16:43:50     2013, Created by RaymondChao
+
+Copyright (C) 2013 Potix Corporation. All Rights Reserved.
+-->
+
+<package name="zkmax.nav" language="xul/html" depends="zul">
+	<widget name="Nav"/>
+	<widget name="Navbar"/>
+	<widget name="Navitem"/>
+	<widget name="Navseparator"/>
+</package>

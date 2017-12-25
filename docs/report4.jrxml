@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report4" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8b05d498-c236-40f2-849f-3c8bc0ff8e2a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="parameter2" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="subReportObject" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="subMap" class="java.util.Map" isForPrompting="false"/>
+	<parameter name="subReportObject1" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="dataList1" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="subMap2" class="java.util.Map" isForPrompting="false"/>
+	<parameter name="dataList2" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="title" class="java.lang.String" isForPrompting="false"/>
+	<group name="subreport1">
+		<groupExpression><![CDATA[$P{subReportObject}]]></groupExpression>
+		<groupHeader>
+			<band height="0"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<subreport>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="30" uuid="902c1be3-5e31-416b-893b-3692d671f704"/>
+					<parametersMapExpression><![CDATA[$P{subMap}]]></parametersMapExpression>
+					<dataSourceExpression><![CDATA[$P{dataList1}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{subReportObject}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupFooter>
+	</group>
+<group name="subreport2">
+		<groupExpression><![CDATA[$P{subReportObject1}]]></groupExpression>
+		<groupHeader>
+			<band height="0"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="30" isRemoveLineWhenBlank="true" uuid="bd62273c-d5f2-4591-aebf-201d3cfbaaa7"/>
+				<parametersMapExpression><![CDATA[$P{subMap2}]]></parametersMapExpression>
+				<dataSourceExpression><![CDATA[$P{dataList2}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subReportObject1}]]></subreportExpression>
+			</subreport>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="100" height="24" uuid="8e431266-fdeb-401d-978a-d893290fa038"/>
+				<imageExpression><![CDATA["C:\\Users\\Administrator\\Desktop\\img_logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="24" width="555" height="20" uuid="9325655d-940b-4f72-a112-047521acd7c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" isBold="true" isUnderline="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="100" height="20" uuid="2f791fca-8d71-43ea-9104-c3ca4208e902"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parameter1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="100" height="20" uuid="5681bb6d-ebf5-4133-a556-7c18e9c81430"/>
+				<textElement verticalAlignment="Middle">
+					<font isUnderline="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parameter2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+
+
+</jasperReport>

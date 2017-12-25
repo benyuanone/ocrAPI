@@ -1,0 +1,1 @@
+(function(){var a={};zk.override(zkex.grid.Detail.prototype,a,{open:function(c,b){a.open.apply(this,arguments);var e=this.parent,d=e?e.getGrid():null;if(d){setTimeout(function(){if(d._scrollbar){d.refreshBar_(false)}},300)}}})})();

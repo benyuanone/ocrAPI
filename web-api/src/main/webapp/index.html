@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>webSockeDemo测试</title>
+    <script src="/assets/common/app.js"></script>
+    <script src="/assets/common/SocketClient.js"></script>
+    <script src="/assets/lib/sockjs/sockjs.js"></script>
+    <script src="/assets/lib/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            connection("localhost:8080/echo", "localhost:8080/sockjs/echo");
+        });
+
+    </script>
+
+
+</head>
+<body>
+由于这不是系统自身的提示框，因此可以很容的修改样式。任何用 ThemeRoller 定制出来的样式都可以应用到提示框上。
+
+对于表单来讲，提示框也是非常有用的，可以用来为每个表单项展示一些额外的提示信息。
+<!--<div class="msg_bianKuangWw">
+    <img class="msgIcon_left" src="/assets/common/image/1.jpg">
+    <div class="msgTitle_left">xxx</div>
+    <div class="msgPanel_left">
+        <span class="triangle_left"></span>
+        <div class="article_left">游客79602 欢迎您进入测试聊天室-\\(^o^)/</div>
+    </div>
+</div>
+<div class="msg_bianKuangWw">
+    <img class="msgIcon_right" src="/assets/common/image/2.jpg">
+    <div class="msgTitle_right" style="text-align:right; padding-right:50px; ">xxx</div>
+    <div class="msgPanel_right">
+        <span class="triangle_right"></span>
+        <div class="article_right">游客79602 欢迎您进入测试聊天室-\\(^o^)/</div>
+    </div>
+</div>-->
+
+
+<!-- 圆圈头像 -->
+<div class="cir" id="cir" style="z-index:999">
+    <img id="photo" src="/assets/common/image/defeatPhoto.jpg"/>
+    <div id="userInfo"></div>
+</div>
+<div id="topBiankuang">
+    <div id="right" class="panel panel-default" >
+        <div id="right-top">
+            <div class="panel-body" id="right-top-top">
+                <div id="right-top-top-left">
+                    chatTM
+                </div>
+                <div class="pull-right" id="right-top-top-right" style="margin-top:  -30px;margin-right: -10px">
+                    <button id="right-top-top-right-close" class="close" >&times;</button>
+                </div>
+            </div>
+        </div>
+        <div id="right-down">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#onLRoom" aria-controls="onLRoom" role="tab" data-toggle="tab">聊天室<span id="roomListRefresh" class="glyphicon glyphicon-refresh cc"/></a></li>
+                <li role="presentation"><a href="#onLFriendList" aria-controls="onLFriendList" role="tab" data-toggle="tab">好友列表</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="onLRoom">xxxxxx</div>
+                <div role="tabpanel" class="tab-pane" id="onLFriendList">5645656.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 聊天界面整个边框-->
+    <div id="left" class="panel panel-default">
+        <!-- 正在对话列表-->
+       <!-- <div id="left-left" class="panel panel-default">正在对话列表</div>-->
+        <!-- 聊天界面-->
+        <div id="left-right" class="panel panel-default">
+            <div id="left-right-top">
+                <div class="panel-body" id="tou">
+                   <div id="tou-msg">
+                       Basic panel example
+                   </div>
+                    <div class="pull-right" style="margin-top:  -30px;margin-right: -10px">
+                        <button id="left-right-top-close" class="close" >&times;</button>
+                        <button id="left-right-top-hide" class="close" style="margin-right: 8px"><span class="glyphicon glyphicon-minus"></span></button>
+                    </div>
+
+                </div>
+            </div>
+            <div id="left-right-down" class="panel panel-default">
+                <div id="left-right-down-left">
+                    <div id="left-right-down-left-message">
+                        <div class="well" id="msg"></div>
+                    </div>
+                    <div id="left-right-down-left-inpit">
+                        <textarea style="height: 100%" class="form-control" placeholder="发送信息..." id="message"></textarea>
+                    </div>
+                    <div id="left-right-down-left-btn">
+                        <div class="input-group"  >
+                              <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="button" id="send" style="float: right;">发送</button>
+                                  <button class="btn btn-inverse" type="button" id="close" style="float: right;">关闭</button>
+                                  <button class="btn btn-inverse" type="button" id="douDong" style="float: right;">抖一下</button>
+                              </span>
+                        </div>
+                    </div>
+                </div>
+                <div id="left-right-down-right" class="panel panel-default">
+                    <div id="left-right-down-right_noticeGJ">
+                        <div class="well" id="left-right-down-right_notice">通知，测试聊天室</div>
+                    </div>
+                    <div id="left-right-down-right-onlineListGJ">在线人数:0</div>
+                    <div id="left-right-down-right_listGJ" class="panel panel-default">
+                        <ul class="list-group" id="onlineList">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

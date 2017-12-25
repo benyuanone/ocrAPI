@@ -1,0 +1,90 @@
+a:hover,a:focus{text-decoration: none;}
+.z-menu-content .z-icon-caret-down{margin-top: 14px;margin-right: -4px;}
+.z-textbox:focus,.z-intbox:focus,.z-doublebox:focus,.z-decimalbox:focus,.z-longbox:focus,z-select:focus{
+    border: 1px solid #66AFE9!important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)!important;
+    outline: 0!important;
+}
+select:focus{border: 1px solid #66AFE9;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    outline: 0;}
+.z-select,.z-option{
+    height:24px;
+    border:1px solid #cfcfcf;
+    border-radius: 3px;
+}
+.z-button{
+    text-shadow: none;
+    font-size: 14px;
+    display:inline-block;
+    height:30px;
+    line-height: 0;
+}
+.z-tab{
+    background: #6FB3E0;
+}
+.z-tab:hover{
+    color: #6FB3E0;
+}
+.z-tab .z-tab-text{
+    color: white;
+}
+.z-tab .z-tab-text:hover{
+    color: #6FB3E0;
+    text-decoration: none;
+    border-bottom: none;
+}
+.z-tab-selected{
+    background: white;
+}
+.z-tab-selected .z-tab-text{
+    color: #6FB3E0;
+}
+.z-button:focus{
+    background: none;
+    outline: none;
+    box-shadow: none;
+}
+
+
+
+input[type=radio]{
+    -webkit-appearance: none; /* remove default */
+    display: inline-block;
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    vertical-align: middle;
+    outline: 0 !important;
+    border: 1px solid #16BDED;
+    /* box-shadow: hsla(0,0%,100%,.15) 0 1px 1px, inset hsla(0,0%,0%,.5) 0 0 0 1px;*/
+    /*background-color: hsla(0,100%,100%,.2);*/
+    background-image: -webkit-radial-gradient(hsla(200,100%,70%,1) 15%, hsla(200,100%,30%,0) 70% );
+    background-repeat: no-repeat;
+    -webkit-transition: background-position .15s cubic-bezier(.8, 0, 1, 1),
+    -webkit-transform .25s cubic-bezier(.8, 0, 1, 1);
+}
+input:checked {
+    -webkit-transition: background-position .2s .15s cubic-bezier(0, 0, .2, 1),
+    -webkit-transform .25s cubic-bezier(0, 0, .2, 1);
+}
+input:active {
+    /* -webkit-transform: scale(1.5);
+     -webkit-transition: -webkit-transform .1s cubic-bezier(0, 0, .2, 1);*/
+}
+/* The up/down direction logic */
+input,
+input:active {
+    background-position: 0 24px;
+}
+input:checked {
+    background-position: 0 0;
+}
+input:checked ~ input,
+input:checked ~ input:active {
+    background-position: 0 -24px;
+}
+
+.z-paging-input{text-align: center}

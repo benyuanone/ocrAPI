@@ -1,0 +1,1 @@
+function(a){var b=this.uuid;a.push("<div",this.domAttrs_(),'><img id="',b,'-img"','src="',this.getImage(),'" class="',this.$s("image"),'"/>','<div id="',b,'-label" style="display:none;" class="',this.$s("text"),'">',this.getLabel(),"</div></div>")};

@@ -1,0 +1,1 @@
+function(a){var b=this.uuid,c=this.getTarget();a.push("<li",this.domAttrs_(),">");a.push('<a href="',this.getHref()?this.getHref():"javascript:;",'"');if(c){a.push(' target="',c,'"')}a.push(' id="',b,'-a" class="',this.$s("content"),'"',this._disabled?' disabled="disabled"':"",">",this.domContent_(),"</a></li>")};

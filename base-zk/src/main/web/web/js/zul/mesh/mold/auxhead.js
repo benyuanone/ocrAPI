@@ -1,0 +1,1 @@
+function(b){b.push("<tr",this.domAttrs_(),' style="text-align:left;">');for(var a=this.firstChild;a;a=a.nextSibling){a.redraw(b)}var c=this.getMeshWidget();if(c&&c._nativebar&&!c.frozen){b.push('<th class="',this.$s("bar"),'" />')}b.push("</tr>")};

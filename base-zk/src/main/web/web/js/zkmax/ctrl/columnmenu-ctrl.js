@@ -1,0 +1,1 @@
+(function(){var a={},b={};zk.override(zul.mesh.ColumnMenuWidget.prototype,a,{_onUngroup:function(c){var d;if((d=c.target.parent._ungroup)){d.setVisible(false)}this._mref.fire("onUngroup",this._mref.getSortDirection()!="ascending",{toServer:!this.getMeshWidget().getModel()})}});zk.override(zul.mesh.ColumnMenupopup.prototype,b,{getUngroupitem:function(){return this._ungroup}})})();

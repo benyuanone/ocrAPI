@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- lang-addon.xml
+	Purpose:
+		A extention with default com.bluemars.core.zk.databind.DataBinder annotation.
+	Description:
+		
+	Note:
+	 1. Properties defined here are assigned to all instances of the
+		specified definition, no matter it is created by ZUML or by program.
+	History:
+		Wed Dec 06 11:48:24     2006, Created by Henri Chen
+
+Copyright (C) 2006 Potix Corporation. All Rights Reserved.
+-->
+<language-addon>
+	<!-- The name of this addon. It must be unique -->
+	<addon-name>databind</addon-name>
+	<!-- Specifies what other addon this depends
+	<depends></depends>
+	-->
+	<!-- Which language this addon will be added to -->
+	<language-name>xul/html</language-name>
+</language-addon>

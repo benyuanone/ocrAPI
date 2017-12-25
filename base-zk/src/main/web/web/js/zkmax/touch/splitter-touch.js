@@ -1,0 +1,1 @@
+(function(){var a={};zk.override(zul.box.Splitter.prototype,a,{setBtnPos_:function(b){var c=this.$n("btn"),d=this.$n(),e=this.$s();if(e.indexOf("z-splitter-os")>=0){a.setBtnPos_.apply(this,arguments)}else{if(b){c.style.left=((d.offsetWidth-c.offsetWidth)/2)+"px"}else{c.style.top=((d.offsetHeight-c.offsetHeight)/2)+"px"}}}})})();

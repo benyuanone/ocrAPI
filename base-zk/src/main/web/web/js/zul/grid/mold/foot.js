@@ -1,0 +1,1 @@
+function(b){b.push("<tr",this.domAttrs_(),">");for(var a=this.firstChild;a;a=a.nextSibling){a.redraw(b)}var c=this.getGrid();if(c._nativebar&&!c.frozen){b.push('<td class="',this.$s("bar"),'" />')}b.push("</tr>")};

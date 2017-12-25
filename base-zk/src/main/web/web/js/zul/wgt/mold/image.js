@@ -1,0 +1,1 @@
+function(a){a.push("<img",this.domAttrs_(),"/>")};

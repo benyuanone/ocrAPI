@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>储罐实时监控</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+	    <script type="text/javascript" src="js/jquery-2.1.4.min.js" ></script>
+		<script type="text/javascript" src="js/common.js" ></script>
+	    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>
+	    <script type="text/javascript" src="js/waterball.js" ></script>
+	    <script src="js/echarts.min.js"></script>
+	    <script type="text/javascript" src="js/drawChart.js" ></script>
+	    <script type="text/javascript" src="js/index.js" ></script>
+		<style>
+			#r{
+			   display: block;
+			   margin: 0 auto;
+			  }
+			  #r::before{
+			   color: black;
+			   content: attr(min);
+			   padding-right: 10px;
+			  }
+			  #r::after{
+			   color: black;
+			   content: attr(max);
+			   padding-left: 10px;
+			  } 
+			  /*.module{
+			  	border: none;
+			  	box-shadow: none;
+		  	    height: 240px;
+			  }
+			  .module-body{
+				    width: 560px; 
+				    position: relative;
+				    left: -52px;
+				    top: -25px;
+				    padding: 0px 15px;
+			  } */
+			  
+			  .graph{height: 340px;width:540px;margin: -50px 20px;}
+			  
+		</style>
+	</head>
+	<body style="background: #f1f2f3;">
+		<div class="top-tip"><span class="top-tip_time"></span><span class="top-tip_gx" style="display: none;"></span></div>
+		<div class="my-top">
+			<!--<span>分类：</span>-->
+			<!--<a class="active" tankTypeId="">全部</a>-->
+			<!--<a>一般</a>-->
+			<!--<a>监管</a>-->
+			<!--<a>保税</a>-->
+			<!--<a>固定拱顶</a>-->
+			<!--<a>外浮顶</a>-->
+			<!--<a>内浮顶</a>-->
+			<!--<a>球形</a>-->
+		</div>
+		<div class="my-content">
+			<div class="my-content_top">
+				<span class="top-label"><span id="sortLabel"></span>：</span>
+				<div class="btn-group">
+				  <a class="btn dropdown-toggle" data-toggle="dropdown">
+				    <span id="sortType" style="font-size: 16px !important;color: #787878 !important;"><span id="sortByGeneral"></span></span>
+				    <span class="caret"></span>
+				  </a>
+				  <ul class="dropdown-menu">
+				      <li lb="0"><a id="sortByGeneral1"></a></li>
+					  <li lb="1"><a id="sortByNumber"></a></li>
+					  <li lb="2"><a id="sortByTask"></a></li>
+				  </ul>
+				</div>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="输入罐号/产品/某某" id="tankId">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+				</div>
+			</div>
+			<div class="my-content_body">
+				<!--<div class="my-content-box">
+					<div class="box">
+						<div class="box-top">
+							<div class="lock-div"><img src="img/lock.png" /></div>
+							<div class="numberbg"><p>VT12345</p></div>
+							<div class="namebg"><p>石油液化气</p></div>
+							<div class="alarm-div"><img src="img/alarm.png" /></div>
+						</div>
+						<div class="box-level">
+							<span class="kd-after">20m&nbsp;&nbsp;&nbsp;-</span>
+							<div class="progress">
+								<div class="progress-bar" role="progressbar"
+									  aria-valuemin="0" aria-valuemax="100"
+									 style="width: 10%;">
+								</div>
+							</div>
+							<span class="kd-before">1m&nbsp;&nbsp;&nbsp;-</span>
+							<div class="box-waterColumn">
+								<canvas id="c1"></canvas>
+							</div>
+						</div>
+						<div class="box-detail">
+							<p>温&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：23℃</p>
+							<p>液&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：23m
+								<span class="warn-div"><span class="flowft">液体过高</span></span>
+							</p>
+							<p>体&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积：2333L
+								<span class="warn-div"><span class="flowft">体积过大</span></span>
+							</p>
+							<p>流&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速：233.3m³/h
+								<span class="inflow-div"><span class="flowft">流入</span></span>
+							</p>
+							<p>理论重量：</span>2333.333t</p>
+							<p>实际重量<span class="red">*</span>：2333.333t</p>
+						</div>
+					</div>
+					<div class="box">
+						<div class="box-top">
+							&lt;!&ndash;<div class="lock-div"><img src="img/lock.png" /></div>&ndash;&gt;
+							<div class="numberbg"><p>VT12345</p></div>
+							<div class="namebg"><p>石油液化气</p></div>
+							&lt;!&ndash;<div class="alarm-div"><img src="img/alarm.png" /></div>&ndash;&gt;
+						</div>
+						<div class="box-level">
+							<span class="kd-after">20m&nbsp;&nbsp;&nbsp;-</span>
+							<div class="progress">
+								<div class="progress-bar" role="progressbar"
+									  aria-valuemin="0" aria-valuemax="100"
+									 style="width: 20%;">
+								</div>
+							</div>
+							<span class="kd-before">1m&nbsp;&nbsp;&nbsp;-</span>
+							<div class="box-waterball">
+								<canvas id="c2"></canvas>
+							</div>
+						</div>
+						<div class="box-detail">
+							<p>温&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：23℃</p>
+							<p>液&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：23m</p>
+							<p>体&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积：2333L</p>
+							<p>流&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速：233.3m³/h
+								<span class="outflow-div"><span class="flowft">流出</span></span>
+							</p>
+							<p>理论重量：</span>2333.333t</p>
+							<p>实际重量<span class="red">*</span>：2333.333t</p>
+						</div>
+						
+					</div>
+					<div class="box">
+						<div class="box-top">
+							<div class="lock-div"><img src="img/lock.png" /></div>
+							<div class="numberbg"><p>VT12345</p></div>
+							<div class="namebg"><p>石油液化气</p></div>
+							&lt;!&ndash;<div class="alarm-div"><img src="img/alarm.png" /></div>&ndash;&gt;
+						</div>
+						<div class="box-level">
+							<span class="kd-after">20m&nbsp;&nbsp;&nbsp;-</span>
+							<div class="progress">
+								<div class="progress-bar" role="progressbar"
+									  aria-valuemin="0" aria-valuemax="100"
+									 style="width: 30%;">
+								</div>
+							</div>
+							<span class="kd-before">1m&nbsp;&nbsp;&nbsp;-</span>
+							<div class="box-waterColumn">
+								<canvas id="c3"></canvas>
+							</div>
+						</div>
+						<div class="box-detail">
+							<p>温&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：23℃</p>
+							<p>液&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：23m
+								&lt;!&ndash;<span class="warn-div"><span class="flowft">液体过高</span></span>&ndash;&gt;
+							</p>
+							<p>体&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积：2333L
+								&lt;!&ndash;<span class="warn-div"><span class="flowft">体积过大</span></span>&ndash;&gt;
+							</p>
+							<p>流&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速：233.3m³/h
+								&lt;!&ndash;<span class="inflow-div"><span class="flowft">流入</span></span>&ndash;&gt;
+							</p>
+							<p>理论重量：</span>2333.333t</p>
+							<p>实际重量<span class="red">*</span>：2333.333t</p>
+						</div>
+					</div>
+				</div>
+				<div class="box-expand-div">
+					<div class="box-expand_part1">
+						<label class="box-expand_label">当前状态【正常】</label>
+						<div style="border-right: 1px dashed #c8c8c8;">
+							<div class="box-expand_item1">
+								<p>压&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;力：101.325kPa℃</p>
+								<p>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：1.23t/m³</p>
+								<p>E&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;C：1.23h</p>
+								<p>重量差异：0.012t<span>[理论重量-实际重量]</span></p>
+							</div>
+							<label class="box-expand_label" style="margin-top: 9px;">当前客户</label>
+							<div class="box-expand_item2">
+								<div>
+									<p>北京大唐</p>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar"
+											 aria-valuemin="0" aria-valuemax="100"
+											 style="width: 90%;">
+										</div>
+									</div>
+									<span>2333.333t</span>
+								</div>
+								<div>
+									<p>杭州智能</p>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar"
+											 aria-valuemin="0" aria-valuemax="100"
+											 style="width: 70%;">
+										</div>
+									</div>
+									<span>2333.333t</span>
+								</div>
+								<div>
+									<p>山东擎天</p>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar"
+											 aria-valuemin="0" aria-valuemax="100"
+											 style="width: 50%;">
+										</div>
+									</div>
+									<span>2333.333t</span>
+								</div>
+								<div>
+									<p>其&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;他</p>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar"
+											 aria-valuemin="0" aria-valuemax="100"
+											 style="width: 20%;">
+										</div>
+									</div>
+									<span>2333.333t</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="box-expand_part2">
+						<label class="box-expand_label">操作信息</label>
+						<div style="border-right: 1px dashed #c8c8c8;">
+							<p class="box-expand_line">最近操作</p>
+							<table class="table-striped">
+								&lt;!&ndash;<th><td>日期</td><td>操作内容</td><td>数量</td></th>
+                                <tr><td>2017-01-01</td><td>装车</td><td>1000m³</td></tr>&ndash;&gt;
+								<thead>
+								<tr>
+									<th>日期</th>
+									<th>操作内容</th>
+									<th>数量</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>2017-01-01</td>
+									<td>装车</td>
+									<td>1000m³</td>
+								</tr>
+								<tr>
+									<td>2017-01-01</td>
+									<td>装车</td>
+									<td>1000m³</td>
+								</tr>
+								</tbody>
+							</table>
+							<p class="box-expand_line">预期操作</p>
+							<table class="table-striped">
+								&lt;!&ndash;<th><td>日期</td><td>操作内容</td><td>数量</td></th>
+                                <tr><td>2017-01-01</td><td>装车</td><td>1000m³</td></tr>&ndash;&gt;
+								<thead>
+								<tr>
+									<th>日期</th>
+									<th>操作内容</th>
+									<th>数量</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>2017-01-01</td>
+									<td>装车</td>
+									<td>1000m³</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="box-expand_part3">
+						<label class="box-expand_label">储罐历史液位温度统计</label>
+						<div class="box-expand_item3">
+							<p>
+								<img src="img/level.png" /><span>液位</span>
+								<img src="img/temperature.png" /><span>温度</span>
+								<img src="img/volume.png" /><span>体积</span>
+								<img src="img/weight.png" /><span>重量</span>
+								<img src="img/velocity.png" /><span>流速</span>
+							</p>
+						</div>
+						<div class="box-lineChart">
+							&lt;!&ndash;<canvas></canvas>&ndash;&gt;
+							<div id="placeholder0" class="graph">
+							</div>
+							&lt;!&ndash;<div id="main" style="height:400px"></div>&ndash;&gt;
+						</div>
+					</div>
+				</div>
+				<div class="my-content-box">
+					<div class="box">
+						<div class="box-top">
+							&lt;!&ndash;<div class="lock-div"><img src="img/lock.png" /></div>&ndash;&gt;
+							<div class="numberbg"><p>VT12345</p></div>
+							<div class="namebg"><p>石油液化气</p></div>
+							&lt;!&ndash;<div class="alarm-div"><img src="img/alarm.png" /></div>&ndash;&gt;
+						</div>
+						<div class="box-level">
+							<span class="kd-after">20m&nbsp;&nbsp;&nbsp;-</span>
+							<div class="progress">
+								<div class="progress-bar" role="progressbar"
+									  aria-valuemin="0" aria-valuemax="100"
+									 style="width: 40%;">
+								</div>
+							</div>
+							<span class="kd-before">1m&nbsp;&nbsp;&nbsp;-</span>
+							<div class="box-waterColumn">
+								<canvas id="c4"></canvas>
+							</div>
+						</div>
+						<div class="box-detail">
+							<p>温&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：23℃</p>
+							<p>液&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：23m
+								&lt;!&ndash;<span class="warn-div"><span class="flowft">液体过高</span></span>&ndash;&gt;
+							</p>
+							<p>体&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积：2333L
+								&lt;!&ndash;<span class="warn-div"><span class="flowft">体积过大</span></span>&ndash;&gt;
+							</p>
+							<p>流&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;速：233.3m³/h
+								&lt;!&ndash;<span class="inflow-div"><span class="flowft">流入</span></span>&ndash;&gt;
+							</p>
+							<p>理论重量：</span>2333.333t</p>
+							<p>实际重量<span class="red">*</span>：2333.333t</p>
+						</div>
+					</div>
+				</div>
+				<div class="box-expand-div">
+					<div class="box-expand_part1">
+						<label class="box-expand_label">当前状态【正常】</label>
+						<div style="border-right: 1px dashed #c8c8c8;">
+							<div class="box-expand_item1">
+								<p>压&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;力：101.325kPa℃</p>
+								<p>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度：1.23t/m³</p>
+								<p>E&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;C：1.23h</p>
+								<p>重量差异：0.012t<span>[理论重量-实际重量]</span></p>
+							</div>
+							<label class="box-expand_label" style="margin-top: 9px;">当前客户</label>
+							<div class="box-expand_item2">
+								<div>
+									<p>北京大唐</p>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar"
+											 aria-valuemin="0" aria-valuemax="100"
+											 style="width: 90%;">
+										</div>
+									</div>
+									<span>2333.333t</span>
+								</div>
+								<div>
+									<p>杭州智能</p>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar"
+											 aria-valuemin="0" aria-valuemax="100"
+											 style="width: 70%;">
+										</div>
+									</div>
+									<span>2333.333t</span>
+								</div>
+								<div>
+									<p>山东擎天</p>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar"
+											 aria-valuemin="0" aria-valuemax="100"
+											 style="width: 50%;">
+										</div>
+									</div>
+									<span>2333.333t</span>
+								</div>
+								<div>
+									<p>其&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;他</p>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar"
+											 aria-valuemin="0" aria-valuemax="100"
+											 style="width: 20%;">
+										</div>
+									</div>
+									<span>2333.333t</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="box-expand_part2">
+						<label class="box-expand_label">操作信息</label>
+						<div style="border-right: 1px dashed #c8c8c8;">
+							<p class="box-expand_line">最近操作</p>
+							<table class="table-striped">
+								&lt;!&ndash;<th><td>日期</td><td>操作内容</td><td>数量</td></th>
+                                <tr><td>2017-01-01</td><td>装车</td><td>1000m³</td></tr>&ndash;&gt;
+								<thead>
+								<tr>
+									<th>日期</th>
+									<th>操作内容</th>
+									<th>数量</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>2017-01-01</td>
+									<td>装车</td>
+									<td>1000m³</td>
+								</tr>
+								<tr>
+									<td>2017-01-01</td>
+									<td>装车</td>
+									<td>1000m³</td>
+								</tr>
+								</tbody>
+							</table>
+							<p class="box-expand_line">预期操作</p>
+							<table class="table-striped">
+								&lt;!&ndash;<th><td>日期</td><td>操作内容</td><td>数量</td></th>
+                                <tr><td>2017-01-01</td><td>装车</td><td>1000m³</td></tr>&ndash;&gt;
+								<thead>
+								<tr>
+									<th>日期</th>
+									<th>操作内容</th>
+									<th>数量</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>2017-01-01</td>
+									<td>装车</td>
+									<td>1000m³</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="box-expand_part3">
+						<label class="box-expand_label">储罐历史液位温度统计</label>
+						<div class="box-expand_item3">
+							<p>
+								<img src="img/level.png" /><span>液位</span>
+								<img src="img/temperature.png" /><span>温度</span>
+								<img src="img/volume.png" /><span>体积</span>
+								<img src="img/weight.png" /><span>重量</span>
+								<img src="img/velocity.png" /><span>流速</span>
+							</p>
+						</div>
+						<div class="box-lineChart">
+							&lt;!&ndash;<canvas></canvas>&ndash;&gt;
+							<div id="placeholder1" class="graph">
+							</div>
+						</div>
+					</div>
+				</div>-->
+			</div>
+		</div>
+	</body>
+</html>

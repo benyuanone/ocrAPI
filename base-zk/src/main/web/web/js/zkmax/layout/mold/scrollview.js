@@ -1,0 +1,1 @@
+function(b){var c=this.uuid;b.push("<div ",this.domAttrs_(),">");if(zk.mobile){b.push('<div id="',c,'-load" class="',this.$s("load"),'"><div id="',c,'-load-image"></div></div>')}b.push('<div id="',c,'-cave" class="',this.$s("content"),'">');for(var a=this.firstChild;a;a=a.nextSibling){this.encloseChildHTML_(a,b)}b.push("</div></div>")};
