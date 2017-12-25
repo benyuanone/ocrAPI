@@ -1,2 +1,0 @@
-ALTER TABLE `erp_tank_list`
-    ADD COLUMN `INDEXNO` INT NULL,

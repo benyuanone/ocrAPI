@@ -1,4 +1,0 @@
-1、将phantomjs.exe、rasterize.js两个文件存放在固定的文件目录下。
-2、将base-utils文件夹下的CommonConstants中的phantomjsPath地址改成相应的文件目录地址（绝对地址），
-    存放截图之后的图片文件可以默认，默认地址就在前面设置的文件目录下的img目录中，也可以改成其他地址。
-3、调用getCutPageImg方法返回生成的截图地址。PhantomTools.getCutPageImg("https://zfcg.baotou.gov.cn/");

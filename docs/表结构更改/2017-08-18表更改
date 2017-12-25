@@ -1,1 +1,0 @@
-ALTER TABLE `ourway_sys_layout_component` MODIFY `EVENT_DATA_CONTENT` VARCHAR(1200);
