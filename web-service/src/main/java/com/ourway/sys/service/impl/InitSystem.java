@@ -1,5 +1,6 @@
 package com.ourway.sys.service.impl;
 
+import com.ourway.baiduapi.constants.BaiDuApiInfo;
 import com.ourway.base.CommonConstants;
 import com.ourway.base.service.BaseInitService;
 import com.ourway.base.utils.QuartzManager;
@@ -138,6 +139,16 @@ public class InitSystem {
 
         if (!TextUtils.isEmpty(pros.get("mailFrom"))) {
             CommonConstants.mailFrom = pros.get("mailFrom").toString();
+        }
+        //百度api基本信息
+        if (!TextUtils.isEmpty(pros.get("baidu.appid"))) {
+            BaiDuApiInfo.APP_ID = pros.get("baidu.appid").toString();
+        }
+        if (!TextUtils.isEmpty(pros.get("baidu.apikey"))) {
+            BaiDuApiInfo.API_KEY = pros.get("baidu.apikey").toString();
+        }
+        if (!TextUtils.isEmpty(pros.get("baidu.secretkey"))) {
+            BaiDuApiInfo.SECRET_KEY = pros.get("baidu.secretkey").toString();
         }
 
     }
