@@ -1,5 +1,7 @@
 package com.ourway.baiduapi.dto;
 
+import net.sf.ezmorph.bean.MorphDynaBean;
+
 import java.util.Map;
 
 /**
@@ -10,7 +12,16 @@ public class IdcardDTO {
    private String words_result_num;
    private String image_status;
    private String risk_type;
-   private Map<String,String> words_result;
+
+    public Map<String, MorphDynaBean> getWords_result() {
+        return words_result;
+    }
+
+    public void setWords_result(Map<String, MorphDynaBean> words_result) {
+        this.words_result = words_result;
+    }
+
+    private Map<String,MorphDynaBean> words_result;
 
     public String getLog_id() {
         return log_id;
@@ -44,11 +55,4 @@ public class IdcardDTO {
         this.risk_type = risk_type;
     }
 
-    public Map<String, String> getWords_result() {
-        return words_result;
-    }
-
-    public void setWords_result(Map<String, String> words_result) {
-        this.words_result = words_result;
-    }
 }
