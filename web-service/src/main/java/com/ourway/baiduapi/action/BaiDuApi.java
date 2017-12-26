@@ -37,6 +37,7 @@ public class BaiDuApi {
         Map<String,Object> tokenMap=JsonUtil.jsonToMap(result);
         if(null!=tokenMap&& !TextUtils.isEmpty(tokenMap.get(ACCESS_TOKEN))){
             BaiDuApiInfo.TOKEN=tokenMap.get(ACCESS_TOKEN).toString();
+            System.out.println("获取到百度apiToken："+BaiDuApiInfo.TOKEN);
         }
     }
 
