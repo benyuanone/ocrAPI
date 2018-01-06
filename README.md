@@ -1,7 +1,8 @@
 ## 使用说明
 ### com.ourway.aliyun下是汉王云的文字识别的示例
 ### com.ourway.baiduapi下是百度文字识别的部分接口：
-:BaiDuApiInfo类下的信息自己去百度开发者中心申请应用，会给你相关信息，以下方法需要先执行getToKen获取密钥【一个月有效】后传如百度识别url才能执行
+BaiDuApiInfo类下的信息自己去百度开发者中心申请应用，会给你相关信息，以下方法需要先执行getToKen获取密钥【一个月有效】后传如百度识别url才能执行
+
 ###1、身份证识别 com.ourway.baiduapi.action.BaiDuApi.idCardDiscriminate
 ###2、驾驶证识别 com.ourway.baiduapi.action.BaiDuApi.driverDiscriminate
 ###3、行驶证识别 com.ourway.baiduapi.action.BaiDuApi.vechiceDiscriminate
