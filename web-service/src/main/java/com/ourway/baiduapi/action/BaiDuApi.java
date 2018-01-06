@@ -217,6 +217,15 @@ public class BaiDuApi {
     }
 
 
+    /**
+    *<p>方法:businessDiscriminate TODO企业营业执照 </p>
+    *<ul>
+     *<li> @param filePath TODO</li>
+    *<li>@return java.util.Map<java.lang.String,java.lang.String>  </li>
+    *<li>@author D.cehn.g </li>
+    *<li>@date 2018/1/6 17:18  </li>
+    *</ul>
+    */
     public static Map<String,String> businessDiscriminate(String filePath){
         String image = Base64ImageUtils.GetImageStrFromPath(filePath);
         String url = "https://aip.baidubce.com/rest/2.0/ocr/v1/business_license?access_token="+BaiDuApiInfo.TOKEN;
