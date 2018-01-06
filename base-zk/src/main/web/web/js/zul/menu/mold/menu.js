@@ -1,1 +1,0 @@
-function(a){var b=this.uuid,d=this.getZclass(),c=this._contentHandler;a.push("<li",this.domAttrs_(),'><a href="javascript:;" id="',b,'-a" class="',this.$s("content"),'">',this.domContent_(),"</a>");if(this.menupopup){this.menupopup.redraw(a)}else{if(c){c.redraw(a)}}a.push("</li>")};

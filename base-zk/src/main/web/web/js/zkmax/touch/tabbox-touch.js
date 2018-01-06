@@ -1,1 +1,0 @@
-(function(){var a={};zk.override(zul.tab.Tabbox.prototype,a,{setMold:function(b){this._mold=b.indexOf("accordion")>-1?"accordion":"default"}})})();

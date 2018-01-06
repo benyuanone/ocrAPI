@@ -1,1 +1,0 @@
-(function(){var a={};zk.override(zul.inp.Textbox.prototype,a,{setRows:function(){a.setRows.apply(this,arguments);var b=this.parent;if(this.desktop&&b&&this.isMultiline()){b.doResizeScroll_()}}})})();

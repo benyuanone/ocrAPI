@@ -1,1 +1,0 @@
-zul.mesh.HeaderWidget.redraw;

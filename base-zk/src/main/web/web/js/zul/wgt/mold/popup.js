@@ -1,1 +1,0 @@
-function(b){var c=this.uuid;b.push("<div",this.domAttrs_(),">");if(this._fixarrow){b.push("<div id=",c,'-p class="z-pointer"></div>')}b.push('<div id="',c,'-cave" class="',this.$s("content"),'">');this.prologHTML_(b);for(var a=this.firstChild;a;a=a.nextSibling){a.redraw(b)}this.epilogHTML_(b);b.push("</div></div>")};

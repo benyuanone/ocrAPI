@@ -1,1 +1,0 @@
-function(c){c.push("<td",this.domAttrs_()+" ");var b;if((b=this.getRowspan())!=1){c.push(' rowspan="',b,'"')}if((b=this.getColspan())!=1){c.push(' colspan="',b,'"')}c.push(">");for(var a=this.firstChild;a;a=a.nextSibling){a.redraw(c)}c.push("</td>")};

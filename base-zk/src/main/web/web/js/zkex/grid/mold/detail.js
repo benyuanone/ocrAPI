@@ -1,1 +1,0 @@
-function(b){var c=this.uuid;b.push("<div",this.domAttrs_(),'><i id="',c,'-icon" class="',this.$s("icon")," ",this.getIconCloseClass_(),'"></i><div id="',c,'-cave" style="',this.getContentStyle()||';display:none;" class="',this.getContentSclass()||'">');for(var a=this.firstChild;a;a=a.nextSibling){a.redraw(b)}b.push("</div></div>")};

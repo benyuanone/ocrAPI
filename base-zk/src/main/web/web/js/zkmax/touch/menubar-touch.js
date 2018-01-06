@@ -1,1 +1,0 @@
-(function(){var a={};zk.override(zul.menu.Menubar.prototype,a,{setAutodrop:zk.$void})})();

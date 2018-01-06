@@ -1,1 +1,0 @@
-(function(){var a={};zk.override(zk.Widget.prototype,a,{domListen_:function(f,e,d,b){if(!this.$weave){var c=this.getDomEvtInf_(this,e,d,b);zk.afterMount(function(){jq(f,zk).bind(c[0],c[1])});return this}}})})();

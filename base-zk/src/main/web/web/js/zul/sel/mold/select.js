@@ -1,1 +1,0 @@
-function(b){b.push("<select",this.domAttrs_(),">");for(var a=this.firstChild;a;a=a.nextSibling){if(a.$instanceof(zul.sel.Option)&&a.isVisible()){a.redraw(b)}}b.push("</select>")};

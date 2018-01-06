@@ -1,1 +1,0 @@
-zk.Page.$redraw;

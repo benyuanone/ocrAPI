@@ -1,1 +1,0 @@
-function(b){b.push("<div",this.domAttrs_(),">",'<div id="',this.uuid,'-cave" class="',this.$s("content"),'">');for(var a=this.firstChild;a;a=a.nextSibling){a.redraw(b)}b.push('</div><div style="height:1px;position:relative;width:1px;"></div></div>')};

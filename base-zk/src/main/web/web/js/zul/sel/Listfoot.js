@@ -1,1 +1,0 @@
-zul.sel.Listfoot=zk.$extends(zul.Widget,{getListbox:function(){return this.parent},setVflex:function(a){a=false;this.$super(zul.sel.Listfoot,"setVflex",a)},setHflex:function(a){a=false;this.$super(zul.sel.Listfoot,"setHflex",a)},deferRedrawHTML_:function(a){a.push("<tr",this.domAttrs_({domClass:1}),' class="z-renderdefer"></tr>')}});

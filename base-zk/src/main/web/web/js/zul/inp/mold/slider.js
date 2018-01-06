@@ -1,1 +1,0 @@
-function(a){var c=this.isVertical(),b=this.uuid;a.push("<div",this.domAttrs_(c?{width:true}:{height:true}),'><div id="',b,'-inner" class="',this.$s("center"),'"><div id="',b,'-btn" class="',this.$s("button"),'"></div></div></div>')};

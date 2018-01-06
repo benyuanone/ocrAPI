@@ -1,1 +1,0 @@
-zul.sel.Listfooter=zk.$extends(zul.mesh.FooterWidget,{getListbox:function(){return this.getMeshWidget()},getListheader:function(){return this.getHeaderWidget()},getMaxlength:function(){var a=this.getListheader();return a?a.getMaxlength():0},domLabel_:function(){return zUtl.encodeXML(this.getLabel(),{maxlength:this.getMaxlength()})}});

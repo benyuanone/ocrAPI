@@ -1,1 +1,0 @@
-function(c){c.push("<td",this.domAttrs_(),">",this._colHtmlPre());for(var b=0,a=this.firstChild;a;a=a.nextSibling,b++){a.redraw(c)}c.push("</td>")};

@@ -1,2 +1,0 @@
-
-zul.mesh.HeadWidget.redraw

@@ -1,1 +1,0 @@
-function(b){var c=this.uuid;b.push("<li ",this.domAttrs_(),'><a href="javascript:;" id="',c,'-cnt" class="',this.$s("content"),'"',this._disabled?' disabled="disabled"':"",">",this.domContent_(),'</a><ul id="',c,'-cave">');for(var a=this.firstChild;a;a=a.nextSibling){a.redraw(b)}b.push("</ul></li>")};

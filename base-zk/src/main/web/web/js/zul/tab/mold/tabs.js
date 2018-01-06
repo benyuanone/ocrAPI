@@ -1,1 +1,0 @@
-function(b){var d=this.getTabbox(),c=this.uuid;b.push("<div ",this.domAttrs_(),">",'<ul id="',c,'-cave" class="',this.$s("content"),'">');for(var a=this.firstChild;a;a=a.nextSibling){a.redraw(b)}b.push("</ul>","</div>")};

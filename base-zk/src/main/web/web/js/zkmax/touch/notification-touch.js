@@ -1,1 +1,0 @@
-(function(){var a={};zk.override(zul.wgt.Notification.prototype,a,{bind_:function(){a.bind_.apply(this,arguments);zk(this).redoCSS()}})})();

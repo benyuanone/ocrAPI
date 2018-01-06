@@ -1,1 +1,0 @@
-function(a){var b=this.uuid;a.push("<li ",this.domAttrs_(),'><a href="',this.getHref()?this.getHref():"javascript:;",'"',this.getTarget()?' target="'+this.getHref()+'"':"",' id="',b,'-a" class="',this.$s("content"),this._disabled?'" disabled="disabled"':"",'">',this.domContent_(),"</a></li>")};

@@ -1,1 +1,0 @@
-zkmax.cmsp={start:zkex.cmsp.start,stop:zkex.cmsp.stop,cometURI:function(a){return zk.ajaxURI("/zkcomet?dtid="+a.id,{desktop:a})}};

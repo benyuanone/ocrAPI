@@ -1,1 +1,0 @@
-(function(){var a={};zk.override(zul.sel.Select.prototype,a,{setMold:function(b){if(this._mold!=b){this._mold=b;this.rerender()}}})})();

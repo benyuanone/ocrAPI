@@ -1,1 +1,0 @@
-function(a){a.push("<option",this.domAttrs_(),">",this.domLabel_(),"</option>")};

@@ -1,1 +1,0 @@
-zul.sel.Treefoot=zk.$extends(zul.Widget,{getTree:function(){return this.parent},setVflex:function(a){a=false;this.$super(zul.sel.Treefoot,"setVflex",a)},setHflex:function(a){a=false;this.$super(zul.sel.Treefoot,"setHflex",a)},deferRedrawHTML_:function(a){a.push("<tr",this.domAttrs_({domClass:1}),' class="z-renderdefer"></tr>')}});

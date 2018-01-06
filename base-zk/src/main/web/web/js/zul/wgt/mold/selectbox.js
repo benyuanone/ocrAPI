@@ -1,1 +1,0 @@
-function(b){b.push("<select",this.domAttrs_(),">");var d=$eval(this.items)||[];for(var c=0,a=d.length;c<a;c++){b.push("<option");if(this._selectedIndex>-1&&this._selectedIndex==c){b.push(' selected="selected"')}b.push(">",d[c],"</option>")}b.push("</select>")};

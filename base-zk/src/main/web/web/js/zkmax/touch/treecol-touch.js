@@ -1,1 +1,0 @@
-(function(){var a={};zk.override(zul.sel.Treecol.prototype,a,{_doSortMouseEvt:zk.$void})})();

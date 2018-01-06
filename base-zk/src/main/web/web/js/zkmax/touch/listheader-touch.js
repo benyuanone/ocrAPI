@@ -1,1 +1,0 @@
-(function(){var a={};zk.override(zul.sel.Listheader.prototype,a,{domClass_:function(d){var c=a.domClass_.apply(this,arguments),b=this.getListbox();if(b&&b.isCheckmark()&&this.parent.firstChild==this&&b._multiple&&!b._listbox$noSelectAll){return c+" "+this.$s("checkmark")}return c},_doSortMouseEvt:zk.$void,_doMouseOver:zk.$void})})();

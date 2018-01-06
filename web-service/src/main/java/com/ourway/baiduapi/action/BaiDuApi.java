@@ -2,7 +2,6 @@ package com.ourway.baiduapi.action;
 
 import com.ourway.baiduapi.constants.BaiDuApiInfo;
 import com.ourway.baiduapi.dto.IdcardDTO;
-import com.ourway.baiduapi.dto.ValueDTO;
 import com.ourway.baiduapi.utils.Base64ImageUtils;
 import com.ourway.baiduapi.utils.HttpClientUtils;
 import com.ourway.baiduapi.utils.ValueUtils;
@@ -43,15 +42,15 @@ public class BaiDuApi {
 
 
     /**
-    *<p>方法:IdCardDiscriminate TODO 识别身份证</p>
+    *<p>方法:idCardDiscriminate TODO识别身份证</p>
     *<ul>
      *<li> @param filePath TODO图片文件路径</li>
-    *<li>@return java.util.List<com.ourway.baiduapi.dto.ValueDTO>  </li>
+    *<li>@return java.util.Map<java.lang.String,java.lang.String>  </li>
     *<li>@author D.cehn.g </li>
-    *<li>@date 2017/12/26 13:57  </li>
+    *<li>@date 2018/1/2 11:56  </li>
     *</ul>
     */
-    public static List<ValueDTO> idCardDiscriminate(String filePath){
+    public static Map<String,String> idCardDiscriminate(String filePath){
         String image = Base64ImageUtils.GetImageStrFromPath(filePath);
         String url = "https://aip.baidubce.com/rest/2.0/ocr/v1/idcard?access_token="+BaiDuApiInfo.TOKEN;
         Map<String, String> headers = new HashMap<String, String>();
@@ -67,7 +66,7 @@ public class BaiDuApi {
             //
             if(!TextUtils.isEmpty(result)){
                 IdcardDTO idcardDTO=JsonUtil.fromJson(result,IdcardDTO.class);
-                List<ValueDTO> vat= ValueUtils.getIdCardValue(idcardDTO.getWords_result());
+                Map<String,String> vat= ValueUtils.getIdCardValue(idcardDTO.getWords_result());
                 return vat;
             }else {
                 return null;
@@ -102,6 +101,7 @@ public class BaiDuApi {
         try {
             CloseableHttpResponse response =  HttpClientUtils.doHttpsPost(url,headers,bodys);
             String result=HttpClientUtils.toString(response);
+            System.out.println(result);
             if(!TextUtils.isEmpty(result)){
                 Map idcardDTO=JsonUtil.jsonToMap(result);
                 List vat= (List)idcardDTO.get(ValueUtils.WORDS_RESULT);
@@ -117,15 +117,15 @@ public class BaiDuApi {
 
 
     /**
-    *<p>方法:driverDiscriminate TODO 驾驶证识别</p>
+    *<p>方法:driverDiscriminate TODO驾驶证识别 </p>
     *<ul>
      *<li> @param filePath TODO</li>
-    *<li>@return java.util.List<com.ourway.baiduapi.dto.ValueDTO>  </li>
+    *<li>@return java.util.Map<java.lang.String,java.lang.String>  </li>
     *<li>@author D.cehn.g </li>
-    *<li>@date 2017/12/26 14:48  </li>
+    *<li>@date 2018/1/2 11:55  </li>
     *</ul>
     */
-    public static List<ValueDTO> driverDiscriminate(String filePath){
+    public static Map<String,String> driverDiscriminate(String filePath){
         String image = Base64ImageUtils.GetImageStrFromPath(filePath);
         String url = "https://aip.baidubce.com/rest/2.0/ocr/v1/driving_license?access_token="+BaiDuApiInfo.TOKEN;
         Map<String, String> headers = new HashMap<String, String>();
@@ -137,10 +137,11 @@ public class BaiDuApi {
         try {
             CloseableHttpResponse response =  HttpClientUtils.doHttpsPost(url,headers,bodys);
             String result=HttpClientUtils.toString(response);
+            System.out.println(result);
             if(!TextUtils.isEmpty(result)){
                 Map idcardDTO=JsonUtil.jsonToMap(result);
                 Map<String,Object> value= (Map<String,Object>)idcardDTO.get(ValueUtils.WORDS_RESULT);
-                List<ValueDTO> valueDTOS=ValueUtils.getDriverCardValue(value);
+                Map<String,String> valueDTOS=ValueUtils.getDriverCardValue(value);
                 return valueDTOS;
             }else {
                 return null;
@@ -152,15 +153,15 @@ public class BaiDuApi {
     }
 
     /**
-    *<p>方法:vechiceDiscriminate TODO 行驶证识别</p>
+    *<p>方法:vechiceDiscriminate TODO行驶证识别</p>
     *<ul>
      *<li> @param filePath TODO</li>
-    *<li>@return java.util.List<com.ourway.baiduapi.dto.ValueDTO>  </li>
+    *<li>@return java.util.Map<java.lang.String,java.lang.String>  </li>
     *<li>@author D.cehn.g </li>
-    *<li>@date 2017/12/26 14:51  </li>
+    *<li>@date 2018/1/2 11:55  </li>
     *</ul>
     */
-    public static List<ValueDTO> vechiceDiscriminate(String filePath){
+    public static Map<String,String> vechiceDiscriminate(String filePath){
         String image = Base64ImageUtils.GetImageStrFromPath(filePath);
         String url = "https://aip.baidubce.com/rest/2.0/ocr/v1/vehicle_license?access_token="+BaiDuApiInfo.TOKEN;
         Map<String, String> headers = new HashMap<String, String>();
@@ -175,7 +176,63 @@ public class BaiDuApi {
             if(!TextUtils.isEmpty(result)){
                 Map idcardDTO=JsonUtil.jsonToMap(result);
                 Map<String,Object> value= (Map<String,Object>)idcardDTO.get(ValueUtils.WORDS_RESULT);
-                List<ValueDTO> valueDTOS=ValueUtils.getDriverCardValue(value);
+                Map<String,String> valueDTOS=ValueUtils.getDriverCardValue(value);
+                return valueDTOS;
+            }else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+    *<p>方法:allDiscriminate TODO通用识别，返回json字符串自己解析</p>
+    *<ul>
+     *<li> @param filePath TODO图片路径</li>
+     *<li> @param url TODO百度api地址+token</li>
+     *<li> @param bodys TODO接口需要参数</li>
+    *<li>@return java.lang.String  </li>
+    *<li>@author D.cehn.g </li>
+    *<li>@date 2018/1/2 13:58  </li>
+    *</ul>
+    */
+    public static String allDiscriminate(String filePath,String url,Map<String, String> bodys ){
+        String image = Base64ImageUtils.GetImageStrFromPath(filePath);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/x-www-form-urlencoded");
+        try {
+            CloseableHttpResponse response =  HttpClientUtils.doHttpsPost(url,headers,bodys);
+            String result=HttpClientUtils.toString(response);
+            if(!TextUtils.isEmpty(result)){
+                return result;
+            }else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public static Map<String,String> businessDiscriminate(String filePath){
+        String image = Base64ImageUtils.GetImageStrFromPath(filePath);
+        String url = "https://aip.baidubce.com/rest/2.0/ocr/v1/business_license?access_token="+BaiDuApiInfo.TOKEN;
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/x-www-form-urlencoded");
+        Map<String, String> bodys = new HashMap<String, String>();
+        bodys.put("image", image);
+        bodys.put("detect_direction", "true");
+        bodys.put("accuracy", "normal");
+        try {
+            CloseableHttpResponse response =  HttpClientUtils.doHttpsPost(url,headers,bodys);
+            String result=HttpClientUtils.toString(response);
+            if(!TextUtils.isEmpty(result)){
+                Map idcardDTO=JsonUtil.jsonToMap(result);
+                Map<String,Object> value= (Map<String,Object>)idcardDTO.get(ValueUtils.WORDS_RESULT);
+                Map<String,String> valueDTOS=ValueUtils.getDriverCardValue(value);
                 return valueDTOS;
             }else {
                 return null;
@@ -186,13 +243,21 @@ public class BaiDuApi {
         }
     }
     public static void main(String[] args) {
-        List list=vechiceDiscriminate("D:/xinfeng/5.jpg");//("D:/xinfeng/1.png");
-        for(Object o:list){
-            ValueDTO v=(ValueDTO)o;
-            System.out.println(v.getKey()+":"+v.getWords());
-        }
-       // driverDiscriminate("D:/xinfeng/4.png");
-//       getToKen();//先获取token，再替换掉现有写的
+//        getToKen();
+//        businessDiscriminate("D:/xinfeng/8.png");
+        generalDiscriminate("D:/xinfeng/01.jpg");
+//        List list=driverDiscriminate("D:/xinfeng/5.jpg");//("D:/xinfeng/1.png");
+//        for(Object o:list){
+//            ValueDTO v=(ValueDTO)o;
+//            System.out.println(v.getKey()+":"+v.getWords());
+//        }
+//        driverDiscriminate("D:/xinfeng/9.jpg");
+//        for(Object o:obj){
+//            ValueDTO v=(ValueDTO)o;
+//            System.out.println(v.getKey()+":"+v.getWords());
+//        }
+//        getToKen();
+        //先获取token，再替换掉现有写的
     }
 
 }

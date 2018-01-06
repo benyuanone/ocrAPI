@@ -1,1 +1,0 @@
-function(a){a.push("<iframe",this.domAttrs_(),">","</iframe>")};

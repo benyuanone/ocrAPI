@@ -1,1 +1,0 @@
-(function(){var a={};zk.override(zul.inp.Slider.prototype,a,{setMold:function(b){if("scale"!=b){if(this._mold!=b){this._mold=b;this.rerender()}}}})})();

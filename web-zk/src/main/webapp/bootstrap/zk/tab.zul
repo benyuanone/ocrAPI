@@ -1,7 +1,0 @@
-<zk>
-    <navbar>
-        <navitem label="Home" selected="true" />
-        <navitem label="Profile" />
-        <navitem label="Messages" />
-    </navbar>
-</zk>

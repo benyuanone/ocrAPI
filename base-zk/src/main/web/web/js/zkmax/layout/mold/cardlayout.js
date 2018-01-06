@@ -1,1 +1,0 @@
-function(b){b.push("<div",this.domAttrs_(),' data-swipeable="true">');for(var a=this.firstChild;a;a=a.nextSibling){this.encloseChildHTML_(a,b)}b.push("</div>")};

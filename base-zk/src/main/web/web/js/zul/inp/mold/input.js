@@ -1,1 +1,0 @@
-function(a){a.push("<input",this.domAttrs_(),"/>")};

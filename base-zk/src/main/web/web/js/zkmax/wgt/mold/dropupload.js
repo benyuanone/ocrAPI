@@ -1,1 +1,0 @@
-function(a){a.push("<div",this.domAttrs_()," >",this.domContent_(),"</div>")};

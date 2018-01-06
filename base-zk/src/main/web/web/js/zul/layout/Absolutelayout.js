@@ -1,1 +1,0 @@
-zul.layout.Absolutelayout=zk.$extends(zul.Widget,{},{redraw:function(b){b.push("<div ",this.domAttrs_(),">");for(var a=this.firstChild;a;a=a.nextSibling){a.redraw(b)}b.push("</div>")}});

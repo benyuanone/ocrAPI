@@ -3,10 +3,7 @@ package com.ourway.baiduapi.utils;
 import com.ourway.baiduapi.dto.ValueDTO;
 import net.sf.ezmorph.bean.MorphDynaBean;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by D.chen.g on 2017/12/26.
@@ -24,24 +21,21 @@ public class ValueUtils {
     *<li>@date 2017/12/26 14:48  </li>
     *</ul>
     */
-    public static List<ValueDTO> getIdCardValue(Map<String, MorphDynaBean> params) throws Exception{
+    public static Map<String,String> getIdCardValue(Map<String, MorphDynaBean> params) throws Exception{
         if (null == params) {
             return null;
         }
         Set<String> keys = params.keySet();
-        List<ValueDTO> valueDTOList = new ArrayList<>(keys.size());
+        Map<String,String> valueDTOMap = new HashMap<>(keys.size());
         ValueDTO valueDTO = null;
         MorphDynaBean map = null;
         for (String key : keys) {
             map = params.get(key);
             if (null!=map) {
-                valueDTO = new ValueDTO();
-                valueDTO.setKey(key);
-                valueDTO.setWords(map.get(WORDS).toString());
-                valueDTOList.add(valueDTO);
+                valueDTOMap.put(key,map.get(WORDS).toString());
             }
         }
-        return valueDTOList;
+        return valueDTOMap;
     }
 
     /**
@@ -53,24 +47,20 @@ public class ValueUtils {
     *<li>@date 2017/12/26 14:49  </li>
     *</ul>
     */
-    public static List<ValueDTO> getDriverCardValue(Map<String, Object> params) throws Exception{
+    public static Map<String,String>  getDriverCardValue(Map<String, Object> params) throws Exception{
         if (null == params) {
             return null;
         }
         Set<String> keys = params.keySet();
-        List<ValueDTO> valueDTOList = new ArrayList<>(keys.size());
-        ValueDTO valueDTO = null;
+        Map<String,String> valueDTOMap = new HashMap<>(keys.size());
         Map<String,Object> map = null;
         for (String key : keys) {
             Object object = params.get(key);
             if (null!=object) {
                 map=(Map<String, Object>)object;
-                valueDTO = new ValueDTO();
-                valueDTO.setKey(key);
-                valueDTO.setWords(map.get(WORDS).toString());
-                valueDTOList.add(valueDTO);
+                valueDTOMap.put(key,map.get(WORDS).toString());
             }
         }
-        return valueDTOList;
+        return valueDTOMap;
     }
 }
