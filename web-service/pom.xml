@@ -12,11 +12,8 @@
     <artifactId>web-service</artifactId>
     <packaging>jar</packaging>
     <dependencies>
-        <dependency>
-            <groupId>com.bckj.base</groupId>
-            <artifactId>base-utils</artifactId>
-            <version>3.5</version>
-        </dependency>
+
+
     </dependencies>
     <build>
         <plugins>

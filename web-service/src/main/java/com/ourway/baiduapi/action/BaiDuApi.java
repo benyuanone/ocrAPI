@@ -3,11 +3,7 @@ package com.ourway.baiduapi.action;
 import com.ourway.baiduapi.constants.BaiDuApiInfo;
 import com.ourway.baiduapi.dto.IdcardDTO;
 import com.ourway.baiduapi.dto.InfoDTO;
-import com.ourway.baiduapi.utils.Base64ImageUtils;
-import com.ourway.baiduapi.utils.HttpClientUtils;
-import com.ourway.baiduapi.utils.ValueUtils;
-import com.ourway.base.utils.JsonUtil;
-import com.ourway.base.utils.TextUtils;
+import com.ourway.baiduapi.utils.*;
 import org.apache.http.client.methods.CloseableHttpResponse;
 
 import java.util.HashMap;
@@ -33,7 +29,7 @@ public class BaiDuApi {
                 +"&client_id="+ BaiDuApiInfo.API_KEY +"&client_secret="+BaiDuApiInfo.SECRET_KEY;
         CloseableHttpResponse response =  HttpClientUtils.doHttpsGet(access_token_url,null);
         String result=HttpClientUtils.toString(response);
-        Map<String,Object> tokenMap=JsonUtil.jsonToMap(result);
+        Map<String,Object> tokenMap= JsonUtil.jsonToMap(result);
         if(null!=tokenMap&& !TextUtils.isEmpty(tokenMap.get(ACCESS_TOKEN))){
             BaiDuApiInfo.TOKEN=tokenMap.get(ACCESS_TOKEN).toString();
             return BaiDuApiInfo.TOKEN;
